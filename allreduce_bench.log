@@ -1,9 +1,19 @@
 ./target/debug/allreduce_bench --root-addr 10.10.1.1 --rank 0 --num-ranks 2 --cuda-device-idx 0 --size 128 --communicator 42 --round 10
 register ctx: prefix="/tmp/mccs-co232", control="control.sock", affinity=None
 Rank 0: warm phase started
-buf[0]=2042
-buf[16777216]=2042
+buf[0]=111
+buf[16777216]=111
 Rank 0: start issuing
 Rank 0: warmup call returned
-Rank0: expected 4085, got 3066
-error: Recipe `allreduce_bench` failed on line 33 with exit code 1
+buf2[0] = 223
+buf2[1] = 223
+buf2[2] = 223
+buf2[3] = 223
+buf2[4] = 223
+buf2[5] = 223
+buf2[6] = 223
+buf2[7] = 223
+buf2[8] = 223
+buf2[9] = 223
+Rank0: warmup phase finished
+[Rank 0/2] Algorithm bandwidth: 0.000002539571685362941 GB/s, Bus bandwidth: 0.000002539571685362941 GB/s

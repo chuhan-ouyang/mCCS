@@ -20,7 +20,7 @@ prepare-environment:
 back host LEVEL='info':
   RUST_LOG={{LEVEL}} ./target/debug/mccs --host {{host}}
 
-root_addr := '192.168.211.34'
+root_addr := '10.10.1.1'
 
 [private]
 bench rank num_ranks round='10' size='128' comm='42' cuda_dev='0':
@@ -109,7 +109,7 @@ eight_gpu_ecmp:
   just one_8gpu_ecmp 6
   just one_8gpu_ecmp 7
   just one_8gpu_ecmp 8
-  just one_8gpu_ecmp 9  
+  just one_8gpu_ecmp 9
 
 four_gpu_flow:
   ./eval/set_ecmp_hashing_algo.sh source-port
@@ -194,7 +194,7 @@ allreduce-setup cnt:
   done
 
 
-collect-cdf: 
+collect-cdf:
   ./eval/set_ecmp_hashing_algo.sh source-port
   cargo run --bin launcher -- --configfile launcher/config.toml --benchmark eval/multi-app/output/setup4-real-fair.toml --silent --output-dir /tmp/setup4-cdf --timeout 600
   cargo run --bin launcher -- --configfile launcher/config.toml --benchmark eval/multi-app/output/setup4-real-qosv1.toml --silent --output-dir /tmp/setup4-cdf --timeout 600

@@ -1,4 +1,4 @@
-workdir = "~/nfs/mCCS"
+workdir = "/users/co232/mCCS"
 
 [env]
 RUST_BACKTRACE = "1"

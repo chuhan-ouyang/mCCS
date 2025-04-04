@@ -115,14 +115,16 @@ fn main() -> ExitCode {
             panic!("cudaMemcpy failed");
         }
     };
-    // for r in 0..num_ranks {
-    //     let data = buf2[r * buffer_size / num_ranks / std::mem::size_of::<i32>()];
-    //     let expected = (base_val as usize * num_ranks + (0 + num_ranks - 1) * num_ranks / 2) as i32;
-    //     if data != expected {
-    //         eprintln!("Rank{}: expected {}, got {}", r, expected, data);
-    //         return ExitCode::FAILURE;
-    //     }
-    // }
+    for r in 0..num_ranks {
+        let data = buf2[r * buffer_size / num_ranks / std::mem::size_of::<i32>()];
+        let expected = (base_val as usize * num_ranks + (0 + num_ranks - 1) * num_ranks / 2) as i32;
+        if data != expected {
+            eprintln!("Rank{}: expected {}, got {}", r, expected, data);
+            return ExitCode::FAILURE;
+        } else {
+            eprintln!("Rank{}: expected {}, got {}", r, expected, data);
+        }
+    }
     for _ in 0..5 {
         libmccs::all_reduce(
             comm,

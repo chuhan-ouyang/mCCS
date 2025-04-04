@@ -1,13 +1,8 @@
 mccs_daemon_basename = "mccs-deamon"
 mccs_daemon_prefix = "/tmp/mccs-${USER}"
 addrs = [
-    "0.0.0.0",
-    "192.168.211.2",
-    "192.168.211.34",
-    "192.168.211.66",
-    "192.168.211.130",
-    "192.168.211.162",
-    "192.168.211.195",
+    "10.10.1.1",
+    "10.10.1.2",
 ]
 listen_port = 5000
 
@@ -33,7 +28,7 @@ adaptive_routing = false
 ar_threshold = 8192
 pci_relaxed_ordering = false
 gdr_flush_disable = true
-socket_if_prefix = "rdma"
+socket_if_prefix = "enp94s0f0np0"
 
 [comm_global_config.net]
 gdr_enable = false
@@ -88,4 +83,3 @@ channels = [
     { channel_id = 0, ring = [0, 1, 2, 3], udp_sport = [[1, 2, 49200], [3, 0, 49200]], net_dev = "mlx5_0" },
     { channel_id = 1, ring = [0, 1, 2, 3], udp_sport = [[1, 2, 49200], [3, 0, 49200]], net_dev = "mlx5_0" },
 ]
-

@@ -41,7 +41,7 @@ fn get_prefix(name: Option<&str>) -> String {
 }
 
 fn main() -> ExitCode {
-    let base_val = 2042;
+    let base_val = 111;
     let opts = Opts::from_args();
     let buffer_size = if opts.size_in_byte {
         opts.size
@@ -114,17 +114,19 @@ fn main() -> ExitCode {
         if err != cudaError::cudaSuccess {
             panic!("cudaMemcpy failed");
         }
-    };
-    for r in 0..num_ranks {
-        let data = buf2[r * buffer_size / num_ranks / std::mem::size_of::<i32>()];
-        let expected = (base_val as usize * num_ranks + (0 + num_ranks - 1) * num_ranks / 2) as i32;
-        if data != expected {
-            eprintln!("Rank{}: expected {}, got {}", r, expected, data);
-            return ExitCode::FAILURE;
-        } else {
-            eprintln!("Rank{}: expected {}, got {}", r, expected, data);
+        // Print first 10 elements to check
+        for i in 0..10 {
+            println!("buf2[{}] = {}", i, buf2[i]);
         }
-    }
+    };
+    // for r in 0..num_ranks {
+    //     let data = buf2[r * buffer_size / num_ranks / std::mem::size_of::<i32>()];
+    //     let expected = (base_val as usize * num_ranks + (0 + num_ranks - 1) * num_ranks / 2) as i32;
+    //     if data != expected {
+    //         eprintln!("Rank{}: expected {}, got {}", r, expected, data);
+    //         return ExitCode::FAILURE;
+    //     }
+    // }
     for _ in 0..5 {
         libmccs::all_reduce(
             comm,

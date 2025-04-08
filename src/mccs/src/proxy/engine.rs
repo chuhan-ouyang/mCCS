@@ -268,6 +268,7 @@ impl ProxyResources {
             if comm.peers_info.is_some() {
                 let pattern_override = self.global_registry.comm_pattern_override.get(&comm_id);
                 let channels = if let Some(pattern) = pattern_override {
+                    log::info!("Pattern override is in effect for communicator {:?}. Using overridden channel pattern.", comm_id);
                     let mut channels = Vec::with_capacity(pattern.channels.len());
                     for chan in pattern.channels.iter() {
                         assert_eq!(chan.ring.len(), comm.num_ranks);
@@ -293,6 +294,8 @@ impl ProxyResources {
                     }
                     channels
                 } else {
+                    log::info!("No pattern override found for communicator {:?}. Using default channel pattern.", comm_id);
+
                     // 0 -> 1 -> ... -> numRanks-1 -> 0
                     let ring_next = (comm.rank + 1) % comm.num_ranks;
                     let ring_prev = (comm.rank + comm.num_ranks - 1) % comm.num_ranks;

@@ -54,6 +54,13 @@ mode = "Allow"
 # magic number: 49200 & 49202
 
 [[comm_patterns_override]]
+communicator_id = 42
+channels = [
+    { channel_id = 0, ring = [0, 1], udp_sport = [[0, 1, 49200], [1, 0, 49200]], net_dev = "mlx5_0" },
+    { channel_id = 1, ring = [0, 1], udp_sport = [[0, 1, 49202], [1, 0, 49202]], net_dev = "mlx5_0" },
+]
+
+[[comm_patterns_override]]
 communicator_id = 114
 channels = [
     { channel_id = 0, ring = [0, 1], udp_sport = [[0, 1, 49200], [1, 0, 49200]], net_dev = "mlx5_0" },

@@ -41,7 +41,7 @@ fn get_prefix(name: Option<&str>) -> String {
 }
 
 fn main() -> ExitCode {
-    let base_val = 111;
+    let base_val = 100;
     let opts = Opts::from_args();
     let buffer_size = if opts.size_in_byte {
         opts.size
